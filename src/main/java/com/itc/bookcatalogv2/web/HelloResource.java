@@ -18,6 +18,9 @@ public class HelloResource {
         this.greetingService = greetingService;
     }
 
+
+    // get adalah salah satu jenis dari http method / http verb
+    // POST, PUT, DELETE, OPTION, TRACE, HEAD, PATCh
     @GetMapping("/hello")
     public String helloWorld() {
         log.trace("this is log TRACE");
