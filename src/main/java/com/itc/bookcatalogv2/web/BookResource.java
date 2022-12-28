@@ -19,10 +19,10 @@ public class BookResource {
     @GetMapping("/book/{bookId}")
     public BookDetailDTO findBookDetail(@PathVariable("bookId") Long id) {
         StopWatch stopWatch = new StopWatch();
-        log.info("Start findBookDetail" + id);
+        log.info("Start findBookDetail" + id); // fitur loger
         stopWatch.start();
         BookDetailDTO result =  bookService.findBookDetailById(id);
-        log.info("finish findBookDetail, execution time = {}", stopWatch.getTotalTimeMillis());
+        log.info("finish findBookDetail, execution time = {}", stopWatch.getTotalTimeMillis()); // fitur loger
         return result;
     }
 }
