@@ -1,0 +1,59 @@
+
+
+app:
+  currency: IDR
+  timezone: Asia/Jakarta
+  welcome-text: Hello World
+
+cloud:
+  api-key: ${CLOUD_KEY}
+
+server:
+  port: 8080
+logging:
+  level:
+     com.itc.bookcatalogv2.service : trace
+
+---
+spring:
+  config:
+    activate:
+      on-profile:
+        - dev
+
+server:
+  port: 8003
+
+app:
+  welcome-text: Hello, this is development server
+
+
+---
+spring:
+  config:
+    activate:
+      on-profile:
+        - production
+
+server:
+  port: 80
+
+app:
+  welcome-text: Hello, this is production server
+
+
+---
+spring:
+  config:
+    activate:
+      on-profile:
+        - test
+
+server:
+  port: 8090
+
+app:
+  welcome-text: Hello, this is test server
+
+
+
