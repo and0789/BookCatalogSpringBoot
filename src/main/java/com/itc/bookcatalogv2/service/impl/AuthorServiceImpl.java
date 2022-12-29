@@ -52,6 +52,7 @@ public class AuthorServiceImpl implements AuthorService {
             Author author = new Author();
             author.setName(dto.getAuthorName());
             author.setBirthDate(LocalDate.ofEpochDay(dto.getBirthDate()));
+            author.setDeleted(false);
             return author;
         }).collect(Collectors.toList());
 
