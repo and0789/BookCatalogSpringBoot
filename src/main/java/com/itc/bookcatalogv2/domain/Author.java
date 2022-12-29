@@ -7,7 +7,10 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.UUID;
 
 @Data
 @NoArgsConstructor
@@ -17,7 +20,9 @@ import java.time.LocalDate;
 // @DynamicUpdate
 @SQLDelete(sql = "UPDATE author SET deleted = true WHERE id = ?")
 @Where(clause = "deleted=false")// agar tidak perlu menambahkan clausa tambahan
-public class Author {
+public class Author extends AbstractBaseEntity {
+    @Serial
+    private static final long serialVersionUID = 7104892851599804599L;
 
     // postgres -> bigserial
     // mysql -> autoincrement
@@ -41,6 +46,4 @@ public class Author {
     @Column(name = "birth_date", nullable = false)
     private LocalDate birthDate;
 
-    @Column(name = "deleted", columnDefinition = "boolean default false")
-    private Boolean deleted;
 }
