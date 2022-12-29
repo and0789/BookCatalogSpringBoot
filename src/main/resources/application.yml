@@ -5,6 +5,7 @@ app:
   timezone: Asia/Jakarta
   welcome-text: Hello World
 
+
 cloud:
   api-key: ${CLOUD_KEY}
 
@@ -12,7 +13,31 @@ server:
   port: 8080
 logging:
   level:
-     com.itc.bookcatalogv2.service : trace
+    com.itc.bookcatalogv2.service: trace
+
+spring:
+  datasource:
+    hikari:
+      connection-timeout: 6000000
+      idle-timeout: 6000000
+      max-lifetime: 18000000
+      maximum-pool-size: 10
+    url: jdbc:postgresql://localhost:5432/ppdb
+    username: postgres
+    password: password
+  jpa:
+    database: postgresql
+    hibernate:
+      ddl-auto: update # create-drop : tabel akan di hapus jika di matikan (khusus testing), validate = untuk production,
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        jdbc:
+          batch_size: 100
+        order_inserts: true
+    show-sql: true
+
+
 
 ---
 spring:

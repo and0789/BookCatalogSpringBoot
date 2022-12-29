@@ -2,6 +2,7 @@ package com.itc.bookcatalogv2.web;
 
 import com.itc.bookcatalogv2.dto.BookCreateDTO;
 import com.itc.bookcatalogv2.dto.BookDetailDTO;
+import com.itc.bookcatalogv2.dto.BookUpdateRequestDTO;
 import com.itc.bookcatalogv2.service.BookService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -38,5 +39,21 @@ public class BookResource {
     @GetMapping("/book")
     public ResponseEntity<List<BookDetailDTO>> findBookList() {
         return ResponseEntity.ok().body(bookService.findBookListDetail());
+    }
+
+    @PutMapping("/book/{bookId}")
+    public ResponseEntity<Void> updateBook(
+            @PathVariable("bookId")
+            Long bookId,
+            @RequestBody BookUpdateRequestDTO dto) {
+        bookService.updateBook(bookId, dto);
+        return ResponseEntity.ok().build();
+    }
+
+
+    @DeleteMapping("/book/{bookId}")
+    public ResponseEntity<Void> deleteBook(@PathVariable("bookId") Long bookId) {
+        bookService.deleteBook(bookId);
+        return ResponseEntity.ok().build();
     }
 }

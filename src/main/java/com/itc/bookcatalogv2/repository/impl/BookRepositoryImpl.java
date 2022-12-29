@@ -14,14 +14,12 @@ public class BookRepositoryImpl implements BookRepository {
     private Map<Long, Book> bookMap;
     @Override
     public Book findBookById(Long id) {
-        Book book = bookMap.get(id);
-        return book;
+        return bookMap.get(id);
     }
 
     @Override
     public List<Book> findAll() {
-        List<Book> bookList = new ArrayList<>(bookMap.values());
-        return bookList;
+        return new ArrayList<>(bookMap.values());
     }
 
     @Override
@@ -30,5 +28,16 @@ public class BookRepositoryImpl implements BookRepository {
         book.setId((long) size + 1);
         bookMap.put(book.getId(), book);
     }
+
+    @Override
+    public void update(Book book) {
+        bookMap.put(book.getId(), book);
+    }
+
+    @Override
+    public void delete(Long bookId) {
+        bookMap.remove(bookId);
+    }
+
 
 }

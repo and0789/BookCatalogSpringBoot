@@ -4,9 +4,9 @@ import com.itc.bookcatalogv2.domain.Author;
 import com.itc.bookcatalogv2.domain.Book;
 import com.itc.bookcatalogv2.dto.BookCreateDTO;
 import com.itc.bookcatalogv2.dto.BookDetailDTO;
+import com.itc.bookcatalogv2.dto.BookUpdateRequestDTO;
 import com.itc.bookcatalogv2.repository.BookRepository;
 import com.itc.bookcatalogv2.service.BookService;
-
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -55,5 +55,24 @@ public class BookServiceImpl implements BookService {
         book.setDescription(dto.getBookDescription());
         bookRepository.save(book);
     }
+
+    @Override
+    public void updateBook(Long bookId, BookUpdateRequestDTO dto) {
+        // get book from repository
+        Book book = bookRepository.findBookById(bookId);
+
+        // update
+        book.setTitle(dto.getBookTitle());
+        book.setDescription(dto.getBookDescription());
+
+        // save
+        bookRepository.update(book);
+    }
+
+    @Override
+    public void deleteBook(Long bookId) {
+        bookRepository.delete(bookId);
+    }
+
 
 }

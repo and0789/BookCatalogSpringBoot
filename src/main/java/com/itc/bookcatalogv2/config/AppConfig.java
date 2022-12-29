@@ -14,7 +14,7 @@ import java.util.Map;
 public class AppConfig {
     @Bean
     public Author author() {
-        return new Author(1L, "Andre Septian", 7189L);
+        return new Author(1L, "Andre Septian", null, false);
     }
 
     @Bean

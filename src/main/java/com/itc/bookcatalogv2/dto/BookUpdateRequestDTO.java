@@ -5,18 +5,14 @@ import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
+
 @Data
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
-//untuk penamaan di json menjadi seperti ini book_title, author_name
-public class BookCreateDTO {
+public class BookUpdateRequestDTO {
 
     @NotBlank
     private String bookTitle;
 
-    @NotBlank
-    private String authorName;
-
-    // @JsonProperty("synopsis") //untuk penamaan di json supaya bisa jadi synopsis
     private String bookDescription;
 
 }
