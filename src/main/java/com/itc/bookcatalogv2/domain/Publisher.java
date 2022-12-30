@@ -4,8 +4,8 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.io.Serial;
-import java.io.Serializable;
 import java.util.List;
+import java.util.UUID;
 
 
 @Data
@@ -33,6 +33,9 @@ public class Publisher extends AbstractBaseEntity {
     // Opsional bila menginginkan relais dua arah / bidirectional relation
     @OneToMany(mappedBy = "publisher")
     private List<Book> books;
+
+    @Column(name = "secure_id", nullable = false, unique = true)
+    private String secureId = UUID.randomUUID().toString();
 
 
 }

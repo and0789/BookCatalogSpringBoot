@@ -10,10 +10,10 @@ import java.io.Serializable;
 import java.util.UUID;
 
 
-@MappedSuperclass
 @Table(indexes = {
         @Index(name = "uk_secure_id", columnList = "secure_id")
 })
+@MappedSuperclass
 public abstract class AbstractBaseEntity implements Serializable {
 
 
