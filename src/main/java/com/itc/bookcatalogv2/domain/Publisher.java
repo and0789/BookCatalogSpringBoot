@@ -34,8 +34,4 @@ public class Publisher extends AbstractBaseEntity {
     @OneToMany(mappedBy = "publisher")
     private List<Book> books;
 
-    @Column(name = "secure_id", nullable = false, unique = true)
-    private String secureId = UUID.randomUUID().toString();
-
-
 }

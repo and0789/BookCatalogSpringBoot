@@ -34,13 +34,17 @@ public class Author extends AbstractBaseEntity {
     // perfoma aplikasi akan menurun jika kolomnya ada sedikit.
 
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "author_generator")
-    @SequenceGenerator(name = "author_generator", sequenceName = "author_id_seq", allocationSize = 1)
     // Identity -> bigserial --> cocok untuk satu insert, sequence cocok untuk proses insert banyak, dengan enable batch insert
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE,
+            generator = "author_generator")
+    @SequenceGenerator(name = "author_generator",
+            sequenceName = "author_id_seq",
+            allocationSize = 1)
     private Long id;
 
-    @Column(name = "name", nullable = false, columnDefinition = "varchar(300)")
+    @Column(name = "author_name", nullable = false, columnDefinition = "varchar(300)")
     private String name;
 
     @Column(name = "birth_date", nullable = false)

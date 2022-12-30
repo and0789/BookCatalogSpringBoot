@@ -8,18 +8,20 @@ import java.util.Optional;
 
 public interface AuthorRepository extends JpaRepository<Author, Long> {
 
-    // Query method name convention
-    // find+keyword
+    //method name convention
+    //find+keyword
+    //sql -> select * from Author a where a.id= :authorId
+    public Optional<Author> findById(Long id);
+
+    public List<Author> findBySecureIdIn(List<String> authorIdList);
+
+    public Optional<Author> findBySecureId(String id);
+    //where id = :id AND deleted=false
+    public Optional<Author> findByIdAndDeletedFalse(Long id);
 
 
-    // sql --> select * from author a where a.id= :authorId
-    // public Optional<Author>findById(Long id);
+    //sql -> select a from Author a where a.author_name = :authorName
+    public List<Author> findByNameLike(String authorName);
 
-
-    // where id= :id And deleted=false
-    Optional<Author> findByIdAndDeletedFalse(Long id);
-
-    // sql --> select a from Author a where a.name LIKE :authorId
-    List<Author> findByNameLike(String authorName);
 
 }
