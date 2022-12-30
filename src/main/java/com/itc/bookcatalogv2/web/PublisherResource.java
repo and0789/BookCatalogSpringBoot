@@ -1,5 +1,6 @@
 package com.itc.bookcatalogv2.web;
 
+import com.itc.bookcatalogv2.annotation.LogThisMethod;
 import com.itc.bookcatalogv2.dto.PublisherCreateRequestDTO;
 import com.itc.bookcatalogv2.dto.PublisherListResponseDTO;
 import com.itc.bookcatalogv2.dto.PublisherUpdateRequestDTO;
@@ -18,6 +19,7 @@ public class PublisherResource {
 
     private final PublisherService publisherService;
 
+
     @PostMapping("/v1/publisher")
     public ResponseEntity<Void> createNewPublisher(@RequestBody @Valid PublisherCreateRequestDTO dto) {
         publisherService.createPublisher(dto);
@@ -31,7 +33,7 @@ public class PublisherResource {
         return ResponseEntity.ok().build();
     }
 
-
+//    @LogThisMethod
     @GetMapping("/v1/publisher")
     public ResponseEntity<ResultPageResponseDTO<PublisherListResponseDTO>> findPublisherList(
             @RequestParam(name = "pages", required = true, defaultValue = "0") Integer pages,

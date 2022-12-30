@@ -27,6 +27,4 @@ public abstract class AbstractBaseEntity implements Serializable {
     @Column(name="deleted", columnDefinition = "boolean default false")
     private boolean deleted;
 
-
-
 }

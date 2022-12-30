@@ -5,6 +5,7 @@ import com.itc.bookcatalogv2.dto.AuthorCreateRequestDTO;
 import com.itc.bookcatalogv2.dto.AuthorResponseDTO;
 import com.itc.bookcatalogv2.dto.AuthorUpdateRequestDTO;
 import com.itc.bookcatalogv2.exceptions.BadRequestExceptions;
+import com.itc.bookcatalogv2.exceptions.ResourceNotFoundException;
 import com.itc.bookcatalogv2.repository.AuthorRepository;
 import com.itc.bookcatalogv2.service.AuthorService;
 import lombok.AllArgsConstructor;
@@ -25,7 +26,7 @@ public class AuthorServiceImpl implements AuthorService {
         // TODO Auto-generated method stub
         // 1. fetch data from databse
         Author author = authorRepository.findBySecureId(id)
-                .orElseThrow(() -> new BadRequestExceptions("invalid.authorId"));
+                .orElseThrow(() -> new ResourceNotFoundException("invalid.authorId"));
         // 2. author -> authorResponseDTO
         AuthorResponseDTO dto = new AuthorResponseDTO();
         dto.setAuthorName(author.getName());
@@ -49,7 +50,7 @@ public class AuthorServiceImpl implements AuthorService {
     @Override
     public void updateAuthor(String authorId, AuthorUpdateRequestDTO dto) {
         Author author = authorRepository.findBySecureId(authorId)
-                .orElseThrow(() -> new BadRequestExceptions("invalid.authorId"));
+                .orElseThrow(() -> new ResourceNotFoundException("invalid.authorId"));
         author.setName(dto.getAuthorName() == null ? author.getName() : dto.getAuthorName());
         author.setBirthDate(
                 dto.getBirthDate() == null ? author.getBirthDate() : LocalDate.ofEpochDay(dto.getBirthDate()));
@@ -68,7 +69,7 @@ public class AuthorServiceImpl implements AuthorService {
         // 1 delete (harddelete)
 //		authorRepository.deleteById(authorId);
         Author author = authorRepository.findBySecureId(authorId)
-                .orElseThrow(() -> new BadRequestExceptions("invalid.authorId"));
+                .orElseThrow(() -> new ResourceNotFoundException("invalid.authorId"));
         authorRepository.delete(author);
         // softdelete
         // 1. select data deleted=false
