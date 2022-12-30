@@ -1,10 +1,7 @@
 package com.itc.bookcatalogv2.service.impl;
 
 import com.itc.bookcatalogv2.domain.Publisher;
-import com.itc.bookcatalogv2.dto.PublisherCreateRequestDTO;
-import com.itc.bookcatalogv2.dto.PublisherListResponseDTO;
-import com.itc.bookcatalogv2.dto.PublisherUpdateRequestDTO;
-import com.itc.bookcatalogv2.dto.ResultPageResponseDTO;
+import com.itc.bookcatalogv2.dto.*;
 import com.itc.bookcatalogv2.exceptions.BadRequestExceptions;
 import com.itc.bookcatalogv2.repository.PublisherRepository;
 import com.itc.bookcatalogv2.service.PublisherService;
@@ -78,5 +75,19 @@ public class PublisherServiceImpl implements PublisherService {
             return dto;
         }).collect(Collectors.toList());
         return PaginationUtil.createResultPageDTO(dtos, pageResult.getTotalElements(), pageResult.getTotalPages());
+    }
+
+    @Override
+    public Publisher findPublisher(String publisherId) {
+        return publisherRepository.findBySecureId(publisherId)
+                .orElseThrow(() -> new BadRequestExceptions("invalid.publisher_id"));
+    }
+
+    @Override
+    public PublisherResponseDTO constructDTO(Publisher publisher) {
+        PublisherResponseDTO dto = new PublisherResponseDTO();
+        dto.setPublisherId(publisher.getSecureId());
+        dto.setPublisherName(publisher.getName());
+        return dto;
     }
 }

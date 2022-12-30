@@ -90,7 +90,7 @@ public class AuthorServiceImpl implements AuthorService {
 
     @Override
     public List<AuthorResponseDTO> constructDTO(List<Author> authors) {
-        return authors.stream().map((a)->{
+        return authors.stream().map((a) -> {
             AuthorResponseDTO dto = new AuthorResponseDTO();
             dto.setAuthorName(a.getName());
             dto.setBirthDate(a.getBirthDate().toEpochDay());

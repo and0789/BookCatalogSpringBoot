@@ -4,6 +4,7 @@ import com.itc.bookcatalogv2.domain.Category;
 import com.itc.bookcatalogv2.dto.CategoryCreateUpdateRequestDTO;
 import com.itc.bookcatalogv2.dto.CategoryListResponseDTO;
 import com.itc.bookcatalogv2.dto.ResultPageResponseDTO;
+import com.itc.bookcatalogv2.exceptions.BadRequestExceptions;
 import com.itc.bookcatalogv2.repository.CategoryRepository;
 import com.itc.bookcatalogv2.service.CategoryService;
 import com.itc.bookcatalogv2.util.PaginationUtil;
@@ -52,5 +53,23 @@ public class CategoryServiceImpl implements CategoryService {
             return dto;
         }).collect(Collectors.toList());
         return PaginationUtil.createResultPageDTO(dtos, pageResult.getTotalElements(), pageResult.getTotalPages());
+    }
+
+    @Override
+    public List<Category> findCategories(List<String> categoryCodeList) {
+        List<Category> categories = categoryRepository.findByCodeIn(categoryCodeList);
+        if (categories.isEmpty()) throw new BadRequestExceptions("category cant empty");
+        return categories;
+    }
+
+    @Override
+    public List<CategoryListResponseDTO> constructDTO(List<Category> categories) {
+        return categories.stream().map((c) -> {
+            CategoryListResponseDTO dto = new CategoryListResponseDTO();
+            dto.setCode(c.getCode());
+            dto.setName(c.getName());
+            dto.setDescription(c.getDescription());
+            return dto;
+        }).collect(Collectors.toList());
     }
 }
